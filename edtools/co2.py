@@ -72,14 +72,15 @@ def co2_when_born(nombre,anio,mes,dia):
         dates.insert(1,fecha)
 #         try:
         values = [df.value.loc[ date.strftime("%Y-%m-%d")] for date in dates ]
-        labels = ['{1}:\n{0:%d %b %Y}\n{1} {2} ppm CO2 when born'.format(d, l,v) for l, d, v in zip (labels, dates,values)]
+        labels = ['{1}\n{0:%d %b %Y}\n{2} ppm CO2'.format(d, l,v) for l, d, v in zip (labels, dates,values)]
 
 
         min_date = date(np.min(dates).year - 2, np.min(dates).month, np.min(dates).day)
         max_date = date(np.max(dates).year + 2, np.max(dates).month, np.max(dates).day)
 
 
-        timeline = 300
+        timeline = 280
+
         fig, ax = plt.subplots(figsize=(14,4))
 
 
@@ -89,8 +90,8 @@ def co2_when_born(nombre,anio,mes,dia):
         ax.set_xlim(min_date, max_date)
     #     ax.axhline(timeline, xmin=0.05, xmax=0.95, c='deeppink', zorder=2)
         ax.axhline(timeline, xmin=0.05, xmax=0.95, c=doradoier, zorder=2,lw=3)
-        ax.scatter(dates, np.full(len(dates),300), s=120, c='palevioletred', zorder=2)
-        ax.scatter(dates, np.full(len(dates),300), s=30, c='darkmagenta', zorder=3 )
+        ax.scatter(dates, np.full(len(dates),timeline), s=120, c=azulier, zorder=2)
+        ax.scatter(dates, np.full(len(dates),timeline), s=30, c='grey', zorder=3 )
 
 
 
