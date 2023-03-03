@@ -92,13 +92,15 @@ def co2_when_born(nombre,anio,mes,dia):
         ax.axhline(timeline, xmin=0.05, xmax=0.95, c=doradoier, zorder=2,lw=3)
         ax.scatter(dates, np.full(len(dates),timeline), s=120, c=azulier, zorder=2)
         ax.scatter(dates, np.full(len(dates),timeline), s=30, c='grey', zorder=3 )
+        ax.set_yticks(np.arange(300, 421, 40))
+
 
 
 
         label_offsets = np.zeros(len(dates))
         label_offsets[::2] = timeline - 25
         label_offsets[1::2] = timeline + 10
-        ax.grid(False)
+        ax.grid(True)
 
         for i, (l, d) in enumerate(zip(labels, dates)):
 
