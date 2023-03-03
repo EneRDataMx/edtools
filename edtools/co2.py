@@ -80,7 +80,6 @@ def co2_when_born(nombre,anio,mes,dia):
 
 
         timeline = 280
-        scale = 1
         fig, ax = plt.subplots()
 
 
