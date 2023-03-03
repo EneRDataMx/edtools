@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='iertools',
-    version='0.5.6',
+    version='0.1.0',
     author=['Guillermo Barrios'],
     author_email=['gbv@ier.unam.mx'],
     description='EnerData tools to play with data visualization',
