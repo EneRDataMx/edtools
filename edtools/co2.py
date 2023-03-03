@@ -4,8 +4,8 @@ from datetime import date
 import numpy as np
 from dateutil.parser import parse
 # colores
-# azulier     = "#1A3D6F"
-# doradoier  = '#C65C25'
+azulier     = "#1A3D6F"
+doradoier  = '#C65C25'
 #  @file     enerdata.mplstyle
 #  @author   Guillermo Barrios <gbv@ier.unam.mx>
 #
@@ -52,7 +52,7 @@ def load_co2():
     df.columns
     df = df[df.value>0]
     df = df.resample('D').interpolate(method='time')
-    return df['value']
+    return df[['value']]
 
 
 def co2_when_born(nombre,anio,mes,dia):
@@ -62,7 +62,7 @@ def co2_when_born(nombre,anio,mes,dia):
 
     inicio = df.index[0].date()
     final  = df.index[-1].date()
-    with plt.style.context('../enerdata_rectangle.mplstyle'):
+    with plt.style.context('https://raw.githubusercontent.com/EneRDataMx/edtools/main/mpstlyes/enerdata_square.mplstyle'):
 
 
         dates = [inicio,final]
@@ -80,7 +80,7 @@ def co2_when_born(nombre,anio,mes,dia):
 
 
         timeline = 300
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(14,4))
 
 
         ax.plot(df.value,lw=1,c=doradoier)
@@ -95,9 +95,9 @@ def co2_when_born(nombre,anio,mes,dia):
 
 
         label_offsets = np.zeros(len(dates))
-        label_offsets[::2] = timeline - 15
-        label_offsets[1::2] = timeline + 5
-        ax.grid()
+        label_offsets[::2] = timeline - 25
+        label_offsets[1::2] = timeline + 10
+        ax.grid(False)
 
         for i, (l, d) in enumerate(zip(labels, dates)):
 
