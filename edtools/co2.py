@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.image as image
 from datetime import date
 import numpy as np
 from dateutil.parser import parse
@@ -8,17 +9,20 @@ azulier     = "#1A3D6F"
 doradoier  = '#C65C25'
 
 def load_co2():
-    f = 'https://raw.githubusercontent.com/EneRDataMx/edtools/main/data/co2_mlo_surface-insitu_1_ccgg_DailyData.txt'
-    df = pd.read_csv(f,skiprows=150,delimiter=' ',parse_dates={'date':[1,2,3,4,5,6]})
-    df.date = pd.to_datetime(df.date,format="%Y %m %d %H %M %S")
-    df.set_index('date',inplace=True)
-    df.columns
-    df = df[df.value>0]
-    df = df.resample('D').interpolate(method='time')
-    return df[['value']]
+    f = "https://raw.githubusercontent.com/EneRDataMx/edtools/main/data/co2_1974_2021.csv"
+    df = pd.read_csv(f,index_col=0,parse_dates=True)
 
+    # f = 'https://raw.githubusercontent.com/EneRDataMx/edtools/main/data/co2_mlo_surface-insitu_1_ccgg_DailyData.txt'
+    # df = pd.read_csv(f,skiprows=150,delimiter=' ',parse_dates={'date':[1,2,3,4,5,6]})
+    # df.date = pd.to_datetime(df.date,format="%Y %m %d %H %M %S")
+    # df.set_index('date',inplace=True)
+    # df.columns
+    # df = df[df.value>0]
+    # df = df.resample('D').interpolate(method='time')
+    return df[['co2']]g
 
-def co2_when_born(nombre,anio,mes,dia):
+imagen = "../img/memo_redondeado.png"
+def co2_when_born(nombre,anio,mes,dia,imagen):
     df = load_co2()
 
     fecha  =  date(anio,mes,dia)
@@ -34,7 +38,7 @@ def co2_when_born(nombre,anio,mes,dia):
         labels.insert(1,nombre)
         dates.insert(1,fecha)
 #         try:
-        values = [df.value.loc[ date.strftime("%Y-%m-%d")] for date in dates ]
+        values = [df.co2.loc[ date.strftime("%Y-%m-%d")] for date in dates ]
         labels = ['{1}\n{0:%d %b %Y}\n{2:.2f} ppm CO2'.format(d, l,v) for l, d, v in zip (labels, dates,values)]
 
 
@@ -46,7 +50,7 @@ def co2_when_born(nombre,anio,mes,dia):
         fig, ax = plt.subplots()
 
 
-        ax.plot(df.value,lw=1,c=doradoier)
+        ax.plot(df.co2,lw=1,c=doradoier)
         ax.set_ylabel("CO2 [ppm]")
 
         ax.set_xlim(min_date, max_date)
