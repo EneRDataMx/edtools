@@ -19,7 +19,7 @@ def load_co2():
     # df.columns
     # df = df[df.value>0]
     # df = df.resample('D').interpolate(method='time')
-    return df[['co2']]g
+    return df[['co2']]
 
 imagen = "../img/memo_redondeado.png"
 def co2_when_born(nombre,anio,mes,dia,imagen):
