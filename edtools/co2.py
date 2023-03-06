@@ -21,8 +21,8 @@ def load_co2():
     # df = df.resample('D').interpolate(method='time')
     return df[['co2']]
 
-imagen = "../img/memo_redondeado.png"
-def co2_when_born(nombre,anio,mes,dia,imagen):
+# imagen = "../img/memo_redondeado.png"
+def co2_when_born(nombre,anio,mes,dia):
     df = load_co2()
 
     fecha  =  date(anio,mes,dia)
